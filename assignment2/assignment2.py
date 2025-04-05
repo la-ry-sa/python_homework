@@ -38,5 +38,19 @@ def employee_find_2(employee_id):
    matches = list(filter(lambda row : int(row[employee_id_column]) == employee_id , employees["rows"]))
    return matches
 
+def sort_by_last_name():
+    last_name_index = column_index('last_name')
+    employees['rows'].sort(key=lambda row: row[last_name_index].strip())
+    return employees['rows']
+
+def employee_dict(row):
+    result = {}
+    for i, field in enumerate(employees['fields']):
+        if field != 'employee_id':
+            result[field] = row[i]
+    return result
+
 employees = read_employees()
 employee_id_column = employees['fields'].index('employee_id')
+
+print(employee_dict(employees['rows'][1]))
