@@ -1,5 +1,8 @@
 import sys
 import csv
+import os
+import custom_module
+from datetime import datetime
 
 def read_employees():
     my_dict = {}
@@ -53,4 +56,66 @@ def employee_dict(row):
 employees = read_employees()
 employee_id_column = employees['fields'].index('employee_id')
 
-print(employee_dict(employees['rows'][1]))
+def all_employees_dict():
+    result = {}
+    for row in employees['rows']:
+        employee_id = row[0]
+        result[employee_id] = employee_dict(row)
+    return result
+
+def get_this_value():
+    return os.getenv('THISVALUE')
+
+def set_that_secret(update_secret):
+    return custom_module.set_secret(update_secret)
+
+def read_minutes():
+    def read_minutes_file(filename):
+        with open(f'../csv/{filename}.csv', 'r', newline='') as file:
+            reader = csv.reader(file)
+            result = {}
+            result['rows'] = []
+            for index, row in enumerate(reader):
+                if index == 0:
+                    result['fields'] = row
+                else:
+                    result['rows'].append(tuple(row))
+        return result
+    minutes1 = read_minutes_file('minutes1')
+    minutes2 = read_minutes_file('minutes2')
+    return minutes1, minutes2
+
+def create_minutes_set():
+    set1 = set(minutes1['rows'])
+    set2 = set(minutes2['rows'])
+    return set1 | set2
+    
+def create_minutes_list():
+    return list(map(lambda x: (x[0], datetime.strptime(x[1], "%B %d, %Y")), list(minutes_set)))
+
+def write_sorted_list():
+    minutes_list.sort(key=lambda x: x[1])
+    formatted_list = list(map(lambda x: (x[0], x[1].strftime("%B %d, %Y")), minutes_list))
+
+    with open('./minutes.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        for row in formatted_list:
+            writer.writerow(row)
+    return formatted_list
+
+set_that_secret('Kuku')
+print(custom_module.secret)
+
+print(employee_dict(employees['rows'][3]))
+
+emp_dict = all_employees_dict()
+print(emp_dict["10"])
+
+minutes1, minutes2 = read_minutes()
+
+m1, m2 = read_minutes()
+print("First row from minutes1:", m1["rows"][0])
+
+minutes_set = create_minutes_set()
+
+minutes_list = create_minutes_list()
