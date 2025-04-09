@@ -42,3 +42,28 @@ employee_shape = more_employees.shape
 print(employee_shape)
 
 print(more_employees.info)
+
+dirty_data = pd.read_csv('dirty_data.csv')
+print(dirty_data)
+clean_data = dirty_data.copy()
+clean_data = clean_data.drop_duplicates()
+print(clean_data)
+clean_data['Age'] = pd.to_numeric(clean_data['Age'], errors='coerce')
+print(clean_data)
+
+clean_data['Salary'] = pd.to_numeric(clean_data['Salary'], errors='coerce')
+print(clean_data)
+
+mean_age = clean_data['Age'].mean()
+clean_data['Age'] = clean_data['Age'].fillna(mean_age)
+median_salary = clean_data['Salary'].median()
+clean_data['Salary'] = clean_data['Salary'].fillna(median_salary)
+print(clean_data)
+
+clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], errors='coerce')
+print(clean_data)
+
+clean_data['Name'] = clean_data['Name'].str.strip()
+clean_data['Department'] = clean_data['Department'].str.strip()
+clean_data['Department'] = clean_data['Department'].str.upper()
+print(clean_data)
