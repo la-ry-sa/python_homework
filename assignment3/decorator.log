@@ -1,0 +1,15 @@
+function: hello
+positional parameters: none
+keyword parameters: none
+return: None
+-----------------------
+function: honest
+positional parameters: (1, 2, 3, 4)
+keyword parameters: none
+return: True
+-----------------------
+function: mind_blowing
+positional parameters: none
+keyword parameters: {'a': 1, 'b': 2, 'c': 'Dusty the Cat'}
+return: <function logger_decorator at 0x000001D0C4B3A2A0>
+-----------------------
