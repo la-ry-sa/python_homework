@@ -1,0 +1,4 @@
+Challenges I faced while scraping owasp_top10:
+
+Without a hint to use XPath, it would be hard to access necessary elements by CSS_selector.
+Minor challenge was to let the page load before scraping - using time.sleep()
