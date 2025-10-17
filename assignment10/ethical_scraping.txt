@@ -1,0 +1,22 @@
+Task 5: Ethical Web Scraping
+
+Which sections of the website are restricted for crawling?
+
+/w/
+/api/
+/trap/
+/wiki/Special:
+
+Are there specific rules for certain user agents?
+
+Some bots are completely blocked: 
+sitecheck.internetseer.com, Zealbot, MSIECrawler, SiteSnagger, WebStripper, WebCopier, 
+Fetch, Offline Explorer, Teleport / TeleportPro etc.
+wget, grub-client
+
+Wikipedia internal bots are allowed:
+IsraBot, Orthogaffe
+
+
+Websites use robots.txt to tell bots what they can and can’t access. 
+It helps keep servers from getting too busy and protects private pages.
